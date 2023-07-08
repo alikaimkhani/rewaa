@@ -1,0 +1,54 @@
+.container {
+  
+    justify-content: space-between;
+
+  }
+
+  #item2 {
+    flex-grow: 2;
+  }
+  
+  .left-container {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  .middle-container {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  input[type="text"],
+  button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .success-message {
+    background-color: #dff0d8;
+    color: #3c763d;
+    padding: 10px;
+    border: 1px solid #d6e9c6;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+
+  .button-container {
+    display: flex; /* Use flexbox to make the buttons appear in a row */
+  }
+
+    .button-container button {
+      margin-right: 10px; /* Adjust the desired amount of space between the buttons */
+    }
+
+
+    .radio-container {
+      display: flex;
+      flex-direction: column; /* Display the elements in a column */
+    }
+    
+    .radio-container div {
+      margin-bottom: 10px; /* Adjust the desired spacing between each radio button and label */
+    }
+    

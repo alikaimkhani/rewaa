@@ -1,0 +1,142 @@
+<div class="container">
+    <div class="row">
+      <div  id = "item2" class="col-md-6">
+   
+        <div class="form-group">
+          <h2>ORDER DETAILS</h2>
+          <input type="text" class="form-control" placeholder="Supplier Name" [(ngModel)]="supplierName">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Location" [(ngModel)]="location">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Supplier Invoice" [(ngModel)]="supplierInvoice">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Notes" [(ngModel)]="notes">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h2>Product Search</h2>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for a product" (input)="search($event)">
+            <div class="input-group-append">
+            <button class="btn btn-primary" (click)="search('')">Clear</button>
+               
+          </div>
+        </div>
+
+        <ul class="list-group mt-3" *ngIf="searchResults.length > 0">
+            <li class="list-group-item" *ngFor="let product of searchResults">
+              {{ product.title }} - ${{ product.price }}
+              <button class="btn btn-success" (click)="addToCart(product)">Add</button>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <div class="container mt-4">
+    <h2>Cart</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      
+        <tr *ngFor="let item of cart">
+          <td (click)="toggleProductDetails(item)">{{ item.title }}</td>
+          <td>${{ item.price }}</td>
+          <td>
+            <input type="number" class="form-control" [(ngModel)]="item.quantity" (input)="updateCartItem(item)">
+          </td>
+          <td>${{ item.price * item.quantity }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="removeFromCart(item)">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Total:</td>
+          <td>${{ getTotalPrice() }}</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+
+  <div *ngIf="showDetails" class="container mt-4">
+    <h2>Product Details</h2>
+    <div>
+      <h4>{{ selectedProduct.title }}</h4>
+      <p>Price: ${{ selectedProduct.price }}</p>
+      <p>Description: {{ selectedProduct.description }}</p>
+      <!-- Add any other details you want to display -->
+    </div>
+  </div>
+
+  
+  <div class="container mt-4">
+    <h2>Payment</h2>
+    <div>
+      <p>Select payment method:</p>
+      <label style="display: block; margin-bottom: 10px;">
+        <strong><input type="radio" name="paymentMethod" value="cash" [(ngModel)]="selectedPaymentMethod"> Pay by Cash</strong>
+      </label>
+      <label style="display: block; margin-bottom: 10px;">
+        <strong><input type="radio" name="paymentMethod" value="card" [(ngModel)]="selectedPaymentMethod"> Pay by Card</strong>
+      </label>
+      
+      
+    </div>
+  
+    <div *ngIf="selectedPaymentMethod === 'card'">
+      <p>Select card option:</p>
+      <div class="radio-container">
+        <div>
+          <input type="radio" name="cardOption" value="option1" [(ngModel)]="selectedCardOption">
+          <label>VISA</label>
+        </div>
+        <div>
+          <input type="radio" name="cardOption" value="option2" [(ngModel)]="selectedCardOption">
+          <label>MASTER</label>
+        </div>
+      </div>
+      <!-- Add more card options as needed -->
+    </div>
+  <div class="button-container">
+    <button class="btn btn-primary" (click)="submitOrder()">Complete Order</button>
+    <button class="btn btn-primary" (click)="submitOrder()">Cancel</button>
+  </div>
+  </div>
+  
+  <div *ngIf="orderSubmitted" class="success-message">Order successfully submitted!</div>
+
+  
